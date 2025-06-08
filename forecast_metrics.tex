@@ -1,0 +1,101 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+\title{Forecasting Metrics: Formal Definitions}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Bias (Systematic Over/Under-Prediction)}
+\textbf{Definition:}
+Bias measures the systematic tendency of a model to over- or under-predict the actual values.
+
+\[
+\text{Bias} = \frac{1}{n} \sum_{t=1}^{n} (\hat{y}_t - y_t)
+\]
+
+\textbf{Interpretation:}
+\begin{itemize}
+  \item Positive bias $\rightarrow$ model overestimates
+  \item Negative bias $\rightarrow$ model underestimates
+  \item Bias $\approx 0$ $\rightarrow$ model is well-centered
+\end{itemize}
+
+\section{Calibration Error (via CRPS)}
+\textbf{Definition:}
+The Continuous Ranked Probability Score (CRPS) measures the quality of probabilistic forecasts by comparing the predicted CDF $F(z)$ against the actual outcome $y_t$:
+
+\[
+\text{CRPS}(F, y_t) = \int_{-\infty}^{\infty} \left(F(z) - \mathbf{1}(z \geq y_t)\right)^2 dz
+\]
+
+\textbf{Interpretation:}
+\begin{itemize}
+  \item Captures both sharpness and calibration
+  \item Lower CRPS = better forecast distribution
+\end{itemize}
+
+\section{Residual Anomaly Detection}
+\textbf{Definition:}
+An anomaly is identified if the forecast error (residual) exceeds a predefined threshold:
+
+\[
+r_t = y_t - \hat{y}_t, \quad \text{Anomaly if } |r_t| > \tau
+\]
+
+\textbf{Interpretation:}
+\begin{itemize}
+  \item Highlights model failures when actual deviates significantly from predicted
+  \item Useful for real-time error monitoring
+\end{itemize}
+
+\section{Data Anomaly Detection}
+\textbf{Definition:}
+Anomaly points in actual observed data are identified based on statistical deviation from local or global structure (e.g., z-score or IQR rule).
+
+\textbf{Interpretation:}
+\begin{itemize}
+  \item Independent of model output
+  \item Detects natural spikes or drops in input data
+\end{itemize}
+
+\section{Data Drift Score (Custom Distribution-Based)}
+\textbf{Definition:}
+A drift score quantifies deviation between reference and observed distributions via stepwise penalties:
+
+\[
+\text{Drift Score} = \sum_{i=1}^{n} \text{penalty}(O_i - R_i)
+\]
+
+\textbf{Interpretation:}
+\begin{itemize}
+  \item Acceptable Range: $|O_i - R_i| < \epsilon_1$ (no penalty)
+  \item Step Error: $\epsilon_1 \leq |O_i - R_i| < \epsilon_2$
+  \item Penalty Error: $|O_i - R_i| \geq \epsilon_2$
+\end{itemize}
+
+\section{Turning Point F1 Score (Trend Change Detection)}
+\textbf{Definition:}
+F1 score is adapted to evaluate detection of local minima or maxima (turning points):
+
+\[
+\text{Precision} = \frac{TP}{TP + FP}, \quad 
+\text{Recall} = \frac{TP}{TP + FN}, \quad 
+F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+\]
+
+\textbf{Interpretation:}
+\begin{itemize}
+  \item Measures timing accuracy of trend reversals
+  \item Valuable in finance, demand forecasting, economics
+\end{itemize}
+
+\end{document}
