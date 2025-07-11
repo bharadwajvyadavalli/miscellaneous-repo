@@ -19,14 +19,42 @@
     urlcolor=cyan,
 }
 
-% TITLE AND AUTHOR
-\title{The Architect's Handbook: A White Paper on the Construction and Comparative Analysis of Foundational Large Language Models}
-\author{An Award-Winning Writer}
+
+\usepackage{geometry} % Recommended for setting page margins
+\geometry{a4paper, margin=1in} % Example margins
+
+% TITLE AND AUTHOR INFORMATION FOR \maketitle
+\title{\Huge\bfseries Foundational Models: \\From Transformer Design to Real-World Benchmarks:\\A Comprehensive White Paper on the Design, Optimization, and Benchmarking of Modern LLMs}
+\author{\Large Bharadwaj Yadavalli}
 \date{\today}
 
 \begin{document}
 
-\maketitle
+% Custom Title Page (Recommended if you want more control than \maketitle)
+\begin{titlepage}
+    \centering
+    \vspace*{2cm} % Adjust vertical space from the top
+
+    {\Huge\bfseries Foundational Models \par}
+    \vspace{0.5cm}
+    {\LARGE\bfseries From Transformer Design to Real-World Benchmarks \par}
+    \vspace{1cm}
+    {\large\itshape A Comprehensive White Paper on the Design, Optimization, and Benchmarking of Modern LLMs \par}
+
+    \vfill % Pushes the following content to the bottom
+
+    {\Large Bharadwaj Yadavalli \par}
+    \vspace{0.3cm}
+    {\Large \today \par} % Use \today directly, no need for \date{} here
+
+    \vspace*{2cm} % Adjust vertical space from the bottom
+\end{titlepage}
+
+
+%\maketitle
+
+
+
 
 \begin{abstract}
 This white paper provides a comprehensive, end-to-end technical examination of the lifecycle of modern foundational Large Language Models (LLMs). We dissect the core architectural principles, from the mathematical underpinnings of the Transformer to contemporary innovations in positional encodings and normalization. We then detail the industrial-scale data engineering pipelines required to curate and process multi-terabyte corpora, followed by an analysis of the systems engineering challenges in large-scale distributed training. The report further explores the critical post-training alignment phase, contrasting methods like RLHF and DPO. Finally, we present a rigorous comparative analysis of state-of-the-art models from leading research labs across a suite of key industry benchmarks, offering strategic insights into the current competitive landscape and future trajectories.
